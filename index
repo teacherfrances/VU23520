@@ -3,237 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Activities Dashboard</title>
+    <title>Campsie TAFE: Friday Conversation Class</title>
+    
+    <!-- Import Fredoka: A super friendly, highly legible, rounded font ideal for learning spaces -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* General Page Setup */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
+            font-family: 'Fredoka', sans-serif;
+            background-color: #f8fafc; 
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            padding: 40px 20px;
         }
-
-        /* Deep Navy Header */
-        header {
-            background-color: #0A192F; /* Deep Navy Blue */
-            color: #FFFFFF; /* White Text */
-            width: 100%;
-            padding: 20px 0;
+        h1 {
             text-align: center;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            color: #1e293b; 
+            margin-bottom: 40px;
+            font-weight: 700;
+            font-size: 2.5rem;
         }
-
-        /* Muted Gold Lesson Accent */
-        .lesson-number {
-            color: #D4AF37; /* Muted Gold */
-            font-weight: bold;
-            font-size: 14px;
-            position: absolute;
-            left: 30px;
-            top: 25px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-
-        /* Layout Grid for Split Screen */
-        .dashboard-layout {
+        /* Grid Layout */
+        .grid-container {
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 25px;
-            width: 95%;
-            max-width: 1400px;
-            margin: 30px 0;
-            box-sizing: border-box;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
-        /* Left Side: Sidebar Control Panel */
-        .sidebar {
-            background-color: #FFFFFF; /* White Content Background */
-            border: 1px solid #D1D5DB; /* Light Gray Border */
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            height: fit-content;
+        /* Base Card Styling */
+        .card {
+            background: #ffffff;
+            border: 3px solid #e2e8f0; 
+            border-radius: 20px; 
+            padding: 24px;
+            text-decoration: none;
+            color: #334155;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
         }
-
-        /* Pale Yellow Learning Box */
-        .learning-box {
-            background-color: #FEF9E7; /* Pale Yellow / Cream */
-            border-left: 5px solid #D4AF37; /* Muted Gold Accent Bar */
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 25px;
+        .card h3 {
+            margin: 0 0 12px 0;
+            font-weight: 600;
+            font-size: 1.35rem;
+            line-height: 1.3;
         }
-
-        .learning-box h2 {
-            margin: 0 0 5px 0;
-            color: #1F2937; /* Dark Gray */
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .learning-box p {
+        .card p {
             margin: 0;
-            color: #4B5563; /* Main Body Text */
-            font-size: 14px;
-            line-height: 1.4;
+            font-size: 15px;
+            line-height: 1.5;
+            font-weight: 400;
         }
 
-        /* Links / Buttons Stack */
-        .links-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+        /* 1. Yellow Theme (Warmers / Speaking) */
+        .card-yellow {
+            border-color: #fef08a;
+            box-shadow: 0 6px 0px #fef08a;
+        }
+        .card-yellow h3 { color: #a16207; }
+        .card-yellow:hover {
+            transform: translateY(-6px);
+            background-color: #fefce8;
+            box-shadow: 0 12px 0px #eab308;
+            border-color: #eab308;
         }
 
-        /* Teal Action Buttons */
-        .btn-start {
-            display: block;
-            background-color: #008080; /* Teal / Dark Green */
-            color: #FFFFFF; /* White Text */
-            text-decoration: none;
-            text-align: center;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 4px 10px rgba(0, 128, 128, 0.15);
+        /* 2. Pink/Purple Theme (Quizzes / Revision) */
+        .card-pink {
+            border-color: #fbcfe8;
+            box-shadow: 0 6px 0px #fbcfe8;
+        }
+        .card-pink h3 { color: #be185d; }
+        .card-pink:hover {
+            transform: translateY(-6px);
+            background-color: #fdf2f8;
+            box-shadow: 0 12px 0px #ec4899;
+            border-color: #ec4899;
         }
 
-        .btn-start:hover {
-            background-color: #006666; /* Darker Teal */
-            transform: translateY(-2px);
+        /* 3. Green Theme (Excursions / Safaris) */
+        .card-green {
+            border-color: #bbf7d0;
+            box-shadow: 0 6px 0px #bbf7d0;
+        }
+        .card-green h3 { color: #15803d; }
+        .card-green:hover {
+            transform: translateY(-6px);
+            background-color: #f0fdf4;
+            box-shadow: 0 12px 0px #22c55e;
+            border-color: #22c55e;
         }
 
-        /* White Restart Button */
-        .btn-restart {
-            display: block;
-            background-color: #FFFFFF; /* White Background */
-            color: #1F2937; /* Dark Gray Text */
-            text-decoration: none;
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            border: 2px solid #D1D5DB; /* Light Gray Border */
-            transition: transform 0.2s, background-color 0.2s;
+        /* 4. Blue Theme (Adventures / Stories) */
+        .card-blue {
+            border-color: #bfdbfe;
+            box-shadow: 0 6px 0px #bfdbfe;
         }
-
-        .btn-restart:hover {
-            background-color: #F9FAFB; /* Subtle off-white */
-            transform: translateY(-2px);
-        }
-
-        .btn-start:active, .btn-restart:active {
-            transform: scale(0.98);
-        }
-
-        /* Right Side: Activity Frame Window */
-        .activity-display {
-            background-color: #FFFFFF; /* White Background */
-            border: 1px solid #D1D5DB; /* Light Gray Border */
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 600px;
-        }
-
-        /* Default Placeholder Screen View */
-        .frame-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            color: #4B5563; /* Dark Gray Text */
-            text-align: center;
-            padding: 40px;
-        }
-
-        .frame-placeholder svg {
-            fill: #4682B4; /* Steel Blue Icon Accent */
-            margin-bottom: 15px;
-        }
-
-        /* Hidden Frame Window till needed */
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            flex: 1;
-            display: none;
+        .card-blue h3 { color: #1d4ed8; }
+        .card-blue:hover {
+            transform: translateY(-6px);
+            background-color: #eff6ff;
+            box-shadow: 0 12px 0px #3b82f6;
+            border-color: #3b82f6;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header>
-        <span class="lesson-number">Lesson 01</span>
-        <h1>Course Dashboard</h1>
-    </header>
+    <h1>🏫 Campsie TAFE: Friday Conversation Class ✨</h1>
 
-    <!-- Main Dynamic Layout -->
-    <div class="dashboard-layout">
-        
-        <!-- Left Column: Controls -->
-        <div class="sidebar">
-            <div class="learning-box">
-                <h2>Today I am learning to:</h2>
-                <p>Complete the core sequence modules step-by-step using interactive elements.</p>
-            </div>
+    <div class="grid-container">
+        <!-- Activity 1 -->
+        <a href="https://ultimotafedocs.github.io/prepositionalcollocationswarmer/" class="card card-yellow" target="_self">
+            <h3>Prepositional collocations warmer</h3>
+            <p>Pick a number → use the expression to make your own sentence starting with "I"</p>
+        </a>
 
-            <!-- Interactive Navigation Target Stack -->
-            <div class="links-stack">
-                <!-- target="activity-window" directs links to load inside our iframe -->
-                <a href="activity1.html" target="activity-window" class="btn-start" onclick="showFrame()">▶ Activity One</a>
-                <a href="activity2.html" target="activity-window" class="btn-start" onclick="showFrame()">▶ Activity Two</a>
-                <a href="activity3.html" target="activity-window" class="btn-start" onclick="showFrame()">▶ Activity Three</a>
-                <a href="activity4.html" target="activity-window" class="btn-start" onclick="showFrame()">▶ Activity Four</a>
-            </div>
+        <!-- Activity 2 -->
+        <a href="https://ultimotafedocs.github.io/prepositionalcollocations/" class="card card-pink" target="_self">
+            <h3>Prepositional collocations revision</h3>
+            <p>A short online quiz about prepositional collocations</p>
+        </a>
 
-            <!-- System Control Button -->
-            <a href="javascript:location.reload()" class="btn-restart">🔄 Reset System View</a>
-        </div>
+        <!-- Activity 3 -->
+        <a href="https://ultimotafedocs.github.io/fridayclassartgalleryexcursionquestions/" class="card card-yellow" target="_self">
+            <h3>Questions after the excursion</h3>
+            <p>Spin the wheel → answer the question</p>
+        </a>
 
-        <!-- Right Column: Interactive Content Window -->
-        <div class="activity-display">
-            <!-- Screen shown before clicking buttons -->
-            <div id="placeholder" class="frame-placeholder">
-                <svg width="64" height="64" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.5-3.5L11 12l-2.5 3.5h7z"/></svg>
-                <h3>System Ready</h3>
-                <p>Select an activity button on the left to launch the interactive workspace module here.</p>
-            </div>
+         <!-- Activity 4 -->
+        <a href="https://ultimotafedocs.github.io/fridayexcursion/" class="card card-blue" target="_self">
+            <h3>Choose your own adventure: Excursion to </h3>
+            <p>Your ending depends on the answers you choose!</p>
+        </a>
 
-            <!-- Content frame container -->
-            <iframe id="activity-window" name="activity-window"></iframe>
-        </div>
+         <!-- Activity 5 -->
+        <a href="https://ultimotafedocs.github.io/excursion/" class="card card-green" target="_self">
+            <h3>Photo proof safari</h3>
+            <p>A Scavenger Hunt at the Art Gallery of NSW</p>
+        </a>
 
+            <!-- Activity 6 -->
+        <a href="https://ultimotafedocs.github.io/excursionreflection_artgalleryofnsw/" class="card card-yellow" target="_self">
+            <h3>Talk about an artwork</h3>
+            <p>Present your answers in front of the class</p>
+        </a>
+
+           <!-- Activity 7 -->
+        <a href="https://ultimotafedocs.github.io/Backfromtheexcursion1/" class="card card-yellow" target="_self">
+            <h3>Back from the excursion (speaking)</h3>
+            <p>Completing key phrases using your own words</p>
+        </a>
+
+           <!-- Activity 8 -->
+        <a href="https://ultimotafedocs.github.io/Backfromtheexcursion2/" class="card card-pink" target="_self">
+            <h3>Back from the excursion (quiz)</h3>
+            <p>Check how many phrases you know!</p>
+        </a>
+
+             <!-- Activity 9 -->
+        <a href="https://ultimotafedocs.github.io/chooseyourownadventure_alex/" class="card card-blue" target="_self">
+            <h3>Choose your own adventure: Alex's story</h3>
+            <p>Read each page and make choices.</p>
+        </a>
     </div>
-
-    <!-- Interface Controller Logic Script -->
-    <script>
-        function showFrame() {
-            document.getElementById('placeholder').style.display = 'none';
-            document.getElementById('activity-window').style.display = 'block';
-        }
-    </script>
 
 </body>
 </html>
