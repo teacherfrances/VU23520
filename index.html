@@ -7,8 +7,9 @@
     <style>
         /* General Page Setup */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #FFFFFF; /* White Main Content Background */
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; /* Soft, readable modern font */
+            background-color: #0A192F; /* Deep Navy Blue Page Background */
+            color: #FFFFFF; /* White Text */
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,172 +18,171 @@
             min-height: 100vh;
         }
 
-        /* Deep Navy Header */
+        /* Deep Navy Header with Gold Bottom Frame Accent */
         header {
-            background-color: #0A192F; /* Deep Navy Blue */
-            color: #FFFFFF; /* White Text */
+            background-color: #0A192F; 
+            color: #FFFFFF; 
             width: 100%;
-            padding: 25px 0;
+            padding: 35px 0 25px 0;
             text-align: center;
             position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             box-sizing: border-box;
+            border-bottom: 3px solid #D4AF37; /* Extra Gold Accent Line */
         }
 
-        /* Muted Gold Lesson Accent */
+        /* Enhanced Muted Gold Lesson Label */
         .lesson-number {
             color: #D4AF37; /* Muted Gold */
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 800;
+            font-size: 16px;
             position: absolute;
-            left: 30px;
-            top: 30px;
+            left: 5%;
+            top: 40px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
+        /* Larger, Friendly Headline */
         header h1 {
             margin: 0;
-            font-size: clamp(18px, 4vw, 28px);
-            padding: 0 110px;
-            line-height: 1.2;
+            font-size: clamp(24px, 5vw, 36px); /* Scaled up for extra readability */
+            padding: 0 15%;
+            font-weight: 700;
+            line-height: 1.3;
         }
 
-        /* Pale Yellow Learning Information Box */
+        /* Pale Yellow Learning Information Box with Thicker Gold Frame */
         .learning-box {
             background-color: #FEF9E7; /* Pale Yellow / Cream */
-            border-left: 5px solid #D4AF37; /* Muted Gold Accent Bar */
-            padding: 15px 20px;
-            border-radius: 8px;
+            border: 3px solid #D4AF37; /* Upgraded to a wrap-around Gold border */
+            border-left: 8px solid #D4AF37; /* Bold Left accent block */
+            padding: 20px 25px;
+            border-radius: 16px;
             width: 90%;
             max-width: 1200px;
-            margin: 25px auto 5px auto;
+            margin: 35px auto 15px auto;
             box-sizing: border-box;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
+        /* Friendly Box Headers */
         .learning-box h2 {
-            margin: 0 0 5px 0;
+            margin: 0 0 8px 0;
             color: #1F2937; /* Dark Gray */
-            font-size: 14px;
+            font-size: 16px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            font-weight: 700;
         }
 
+        /* Expanded, highly legible instruction body text */
         .learning-box p {
             margin: 0;
-            color: #4B5563; /* Main Body Text */
-            font-size: 14px;
-            line-height: 1.4;
+            color: #1F2937; /* Main Body Text */
+            font-size: 17px;
+            line-height: 1.5;
         }
 
-        /* 3x3 Responsive Layout Grid */
+        /* 3x3 Responsive Grid */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 equal columns on desktop */
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 25px;
             width: 90%;
             max-width: 1200px;
             margin: 25px 0 40px 0;
             box-sizing: border-box;
         }
 
-        /* Base Card Styling with a Default Light Gray Fallback */
+        /* Main Tile Cards - Thicker Gold Outlines */
         .activity-card {
-            background-color: #FFFFFF; /* White Content Background */
-            border: 2.5px solid #D1D5DB; /* Light Gray Outer Border */
-            border-radius: 16px;
-            padding: 24px;
+            background-color: #FFFFFF; /* White Block Canvas Background */
+            border: 4px solid #D4AF37; /* All tiles now use heavy Muted Gold borders */
+            border-radius: 20px; /* Rounder corners for a friendlier look */
+            padding: 28px;
             text-decoration: none;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             text-align: left;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
                         background-color 0.2s, 
-                        border-color 0.2s, 
-                        box-shadow 0.2s;
+                        border-color 0.2s;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Black/Dark Gray text for main body explanations */
+        /* Larger, friendly card titles */
+        .activity-card h3 {
+            margin: 0 0 12px 0;
+            font-size: 21px; /* Scaled up title fonts */
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* Larger, approachable text for card descriptions */
         .activity-card p {
-            color: #1F2937; 
+            color: #4B5563; /* Dark Gray Text */
             margin: 0;
-            font-size: 14px;
+            font-size: 16px; /* Scaled up description font */
             line-height: 1.5;
         }
 
         /* -------------------------------------------------------------
-           INDIVIDUAL CARD COLOUR STYLES (Matching the Image Layout)
+           TEXT ACCENT COLOR VARIATIONS (Inside the Gold Border Tiles)
         ------------------------------------------------------------- */
-        
-        /* Muted Gold / Warm Yellow Tiles (1, 3, 7) */
-        .tile-gold { border-color: #D4AF37; }
-        .tile-gold h3 { color: #D4AF37; margin: 0 0 12px 0; font-size: 18px; font-weight: bold; }
+        .text-gold h3   { color: #C59B27; } /* Warm Gold title text */
+        .text-pink h3   { color: #DF4759; } /* Deep Pink title text */
+        .text-blue h3   { color: #2A6496; } /* Steel Blue title text */
+        .text-teal h3   { color: #006666; } /* Dark Teal title text */
 
-        /* Maroon / Pink Pink Revision Tiles (2, 8) */
-        .tile-pink { border-color: #ff6b81; }
-        .tile-pink h3 { color: #ff6b81; margin: 0 0 12px 0; font-size: 18px; font-weight: bold; }
-
-        /* Steel Blue / Medium Blue Adventure Tiles (4, 9) */
-        .tile-blue { border-color: #4682B4; }
-        .tile-blue h3 { color: #4682B4; margin: 0 0 12px 0; font-size: 18px; font-weight: bold; }
-
-        /* Teal / Dark Green Safari Tiles (5, 6) */
-        .tile-teal { border-color: #008080; }
-        .tile-teal h3 { color: #008080; margin: 0 0 12px 0; font-size: 18px; font-weight: bold; }
-
-        /* -------------------------------------------------------------
-           RESPONSIVE INTERACTION STATES (Enlarge / Select)
-        ------------------------------------------------------------- */
-        
         /* Desktop Hover state */
         @media (hover: hover) {
             .activity-card:hover {
-                transform: scale(1.04); /* Enlarge animation */
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+                transform: scale(1.04);
+                box-shadow: 0 12px 30px rgba(212, 175, 55, 0.25);
             }
         }
 
         /* Active Selected State: Turns the card into the Teal action color */
         .activity-card.active {
-            background-color: #008080; /* Flips background color entirely to Teal */
+            background-color: #008080; /* Flips card background color to Teal */
             border-color: #008080;
-            transform: scale(1.05); /* Enlarge sticky focus state */
-            box-shadow: 0 8px 20px rgba(0, 128, 128, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.4);
         }
 
-        /* Switches all inner headings and text to crisp White when selected */
+        /* Reverses all inner card typography to White when selected */
         .activity-card.active h3, 
         .activity-card.active p {
             color: #FFFFFF !important; 
-            opacity: 1;
         }
 
-        /* Reset System Button Container */
+        /* Reset System Button Section */
         .btn-restart-container {
             width: 90%;
             max-width: 1200px;
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .btn-restart {
             background-color: #FFFFFF; /* White Background */
             color: #1F2937; /* Dark Gray Text */
             text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: bold;
-            border: 2px solid #D1D5DB; /* Light Gray Border */
-            transition: background-color 0.2s;
+            border: 3px solid #D4AF37; /* Gold Frame Accent */
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .btn-restart:hover {
-            background-color: #F9FAFB;
+            background-color: #FEF9E7; /* Light cream hover state */
+            transform: translateY(-2px);
         }
 
         /* -------------------------------------------------------------
@@ -190,33 +190,33 @@
         ------------------------------------------------------------- */
         @media (max-width: 992px) {
             .dashboard-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns on intermediate tablet screen sizes */
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+                gap: 20px;
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
             header {
-                padding: 15px 0;
+                padding: 20px 0;
             }
             .lesson-number {
                 position: static;
                 display: block;
-                margin-bottom: 6px;
-                font-size: 12px;
+                margin-bottom: 8px;
+                font-size: 14px;
             }
             header h1 {
-                padding: 0 15px;
+                padding: 0 20px;
             }
             .dashboard-grid {
-                grid-template-columns: 1fr; /* Mobile viewports break down into 1 single responsive fluid column */
-                gap: 15px;
-                margin-bottom: 25px;
+                grid-template-columns: 1fr; /* Completely fluid single column layout stack for mobile */
+                gap: 20px;
             }
             .activity-card {
-                padding: 20px;
+                padding: 24px;
             }
             .activity-card:active {
-                transform: scale(1.03); /* Finger press feedback response scale */
+                transform: scale(1.02);
             }
             .btn-restart-container {
                 justify-content: center;
@@ -231,53 +231,52 @@
 </head>
 <body>
 
-    <!-- Header Section (Deep Navy) -->
+    <!-- Header Section (Deep Navy Base) -->
     <header>
         <span class="lesson-number">Lesson 01</span>
         <h1>Campsie TAFE: Friday Conversation Class</h1>
     </header>
 
-    <!-- Objective Area (Pale Yellow Box) -->
+    <!-- Objective Area (Pale Yellow Box wrapped with Gold) -->
     <div class="learning-box">
         <h2>Today I am learning to:</h2>
         <p>Utilize prepositional collocations correctly and present findings fluently following our class excursion study program.</p>
     </div>
 
-    <!-- 3x3 Multi-Colored Responsive Grid Layout -->
+    <!-- 3x3 Responsive Grid Layout with Gold Tile Borders -->
     <div class="dashboard-grid">
 
         <!-- Row 1 -->
-        <a href="activity1.html" class="activity-card tile-gold" onclick="setActiveCard(this)">
+        <a href="activity1.html" class="activity-card text-gold" onclick="setActiveCard(this)">
             <h3>Prepositional collocations warmer</h3>
             <p>Pick a number → use the expression to make your own sentence starting with "I"</p>
         </a>
 
-        <a href="activity2.html" class="activity-card tile-pink" onclick="setActiveCard(this)">
+        <a href="activity2.html" class="activity-card text-pink" onclick="setActiveCard(this)">
             <h3>Prepositional collocations revision</h3>
             <p>A short online quiz about prepositional collocations</p>
         </a>
 
-        <a href="activity3.html" class="activity-card tile-gold" onclick="setActiveCard(this)">
+        <a href="activity3.html" class="activity-card text-gold" onclick="setActiveCard(this)">
             <h3>Questions after the excursion</h3>
             <p>Spin the wheel → answer the question</p>
         </a>
 
         <!-- Row 2 -->
-        <a href="activity4.html" class="activity-card tile-blue" onclick="setActiveCard(this)">
+        <a href="activity4.html" class="activity-card text-blue" onclick="setActiveCard(this)">
             <h3>Choose your own adventure: Excursion to</h3>
             <p>Your ending depends on the answers you choose!</p>
         </a>
 
-        <a href="activity5.html" class="activity-card tile-teal" onclick="setActiveCard(this)">
+        <a href="activity5.html" class="activity-card text-teal" onclick="setActiveCard(this)">
             <h3>Photo proof safari</h3>
             <p>A Scavenger Hunt at the Art Gallery of NSW</p>
         </a>
 
-        <a href="activity6.html" class="activity-card tile-teal" onclick="setActiveCard(this)">
+        <a href="activity6.html" class="activity-card text-teal" onclick="setActiveCard(this)">
             <h3>Talk about an artwork</h3>
             <p>Present your answers in front of the class</p>
         </a>
 
         <!-- Row 3 -->
-        <a href="activity7.html" class="activity-card tile-gold" onclick="setActiveCard(this)">
-            <h3>Back from the excursion (speaking)</h3>
+        <a href="activity7.html" class="activity-card text-gold" onclick="setActiveCard(this)">
