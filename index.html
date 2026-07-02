@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Activities Dashboard</title>
+    <title>Campsie TAFE: Friday Conversation Class</title>
     <style>
         /* General Page Setup */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
+            background-color: #FFFFFF; /* White Main Content Background */
             margin: 0;
             padding: 0;
             display: flex;
@@ -22,7 +22,7 @@
             background-color: #0A192F; /* Deep Navy Blue */
             color: #FFFFFF; /* White Text */
             width: 100%;
-            padding: 20px 0;
+            padding: 25px 0;
             text-align: center;
             position: relative;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -36,47 +36,29 @@
             font-size: 14px;
             position: absolute;
             left: 30px;
-            top: 25px;
+            top: 30px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* Fluid dynamic header sizing for tiny displays */
+        /* Fluid dynamic header sizing for mobile displays */
         header h1 {
             margin: 0;
-            font-size: clamp(18px, 5vw, 28px); 
-            padding: 0 110px; /* Leaves clear boundary room for absolute tags */
+            font-size: clamp(18px, 4vw, 28px);
+            padding: 0 110px;
             line-height: 1.2;
         }
 
-        /* Mobile-First Fluid Layout Grid */
-        .dashboard-layout {
-            display: grid;
-            grid-template-columns: 1fr; /* Stacks columns vertically on mobile */
-            gap: 20px;
-            width: 95%;
-            max-width: 1400px;
-            margin: 20px 0 80px 0; /* Extra base margin to prevent sticky footer overlap */
-            box-sizing: border-box;
-        }
-
-        /* Sidebar Control Panel */
-        .sidebar {
-            background-color: #FFFFFF; /* White Content Background */
-            border: 1px solid #D1D5DB; /* Light Gray Border */
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            height: fit-content;
-        }
-
-        /* Pale Yellow Learning Box */
+        /* Pale Yellow Learning Information Box */
         .learning-box {
             background-color: #FEF9E7; /* Pale Yellow / Cream */
             border-left: 5px solid #D4AF37; /* Muted Gold Accent Bar */
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 25px auto 5px auto;
+            box-sizing: border-box;
         }
 
         .learning-box h2 {
@@ -94,202 +76,220 @@
             line-height: 1.4;
         }
 
-        /* Links / Buttons Stack */
-        .links-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+        /* 3x3 Responsive Layout Grid matching the image */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 equal columns on desktop */
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 25px 0 40px 0;
+            box-sizing: border-box;
         }
 
-        /* Teal Action Buttons */
-        .btn-start {
-            display: block;
-            background-color: #008080; /* Teal / Dark Green */
-            color: #FFFFFF; /* White Text */
+        /* Card Link Buttons using Light Gray borders */
+        .activity-card {
+            background-color: #FFFFFF; /* White Background */
+            border: 2px solid #D1D5DB; /* Light Gray Border */
+            border-radius: 16px;
+            padding: 24px;
             text-decoration: none;
-            text-align: center;
-            padding: 16px; /* Great touch targets */
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 128, 128, 0.15);
-            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        border-color 0.2s, 
+                        box-shadow 0.2s;
             -webkit-tap-highlight-color: transparent;
         }
 
-        .btn-start:hover {
-            background-color: #006666; /* Darker Teal */
+        /* Main Activity Titles inside Card (Teal Primary Action Color) */
+        .activity-card h3 {
+            color: #008080; /* Teal / Dark Green */
+            margin: 0 0 12px 0;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.3;
         }
 
-        /* Active Button Styling */
-        .btn-start.active {
-            background-color: #FFFFFF; /* Flips to White background */
-            color: #008080; /* Teal text */
-            border: 2px solid #008080; /* Teal border */
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        /* Body Explanations Inside Card */
+        .activity-card p {
+            color: #1F2937; /* Black/Dark Gray Body Text */
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
-        /* White Restart Button */
+        /* HOVER: Elevate and enlarge card cleanly on mouse device inputs */
+        @media (hover: hover) {
+            .activity-card:hover {
+                transform: scale(1.04); /* Enlarge animation */
+                border-color: #008080; /* Changes light gray border to teal on focus */
+                box-shadow: 0 10px 25px rgba(0, 128, 128, 0.1);
+            }
+        }
+
+        /* ACTIVE SELECTION STATE: Flips card design entirely into corporate palette focus */
+        .activity-card.active {
+            background-color: #008080; /* Flips card to Teal Background */
+            border-color: #008080;
+            transform: scale(1.05); /* Keeps selected option enlarged */
+            box-shadow: 0 8px 20px rgba(0, 128, 128, 0.2);
+        }
+
+        .activity-card.active h3 {
+            color: #FFFFFF; /* Text transitions to White on dark background */
+        }
+
+        .activity-card.active p {
+            color: #FFFFFF; /* Description text changes to White */
+            opacity: 0.9;
+        }
+
+        /* Dynamic System View Controller Button */
+        .btn-restart-container {
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 50px;
+        }
+
         .btn-restart {
-            display: block;
             background-color: #FFFFFF; /* White Background */
             color: #1F2937; /* Dark Gray Text */
             text-decoration: none;
-            text-align: center;
-            padding: 14px;
+            padding: 12px 24px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: bold;
             border: 2px solid #D1D5DB; /* Light Gray Border */
             transition: background-color 0.2s;
-            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-restart:hover {
             background-color: #F9FAFB;
         }
 
-        .btn-start:active:not(.active), .btn-restart:active, .sticky-nav-btn:active {
-            transform: scale(0.98);
+        /* RESPONSIVE RESPONSIVENESS OVERRIDES */
+        @media (max-width: 992px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet devices */
+            }
         }
 
-        /* Activity Frame Window Container */
-        .activity-display {
-            background-color: #FFFFFF; /* White Background */
-            border: 1px solid #D1D5DB; /* Light Gray Border */
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 480px; /* Comfortable height for smartphone screens */
-        }
-
-        /* Default Placeholder Screen View */
-        .frame-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            color: #4B5563; /* Dark Gray Text */
-            text-align: center;
-            padding: 30px;
-        }
-
-        .frame-placeholder svg {
-            fill: #4682B4; /* Steel Blue Icon Accent */
-            margin-bottom: 15px;
-        }
-
-        /* Iframe Window Sizing */
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            flex: 1;
-            display: none;
-        }
-
-        /* Sticky Footer Navigation Bar for Mobile */
-        .mobile-footer-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #0A192F; /* Deep Navy Blue */
-            padding: 12px;
-            display: flex;
-            justify-content: center;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
-            z-index: 1000;
-            display: none; /* Hidden on desktop screens */
-        }
-
-        .sticky-nav-btn {
-            background-color: #FFFFFF; /* White Action Accent Box */
-            color: #0A192F; /* Deep Navy Text */
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            padding: 12px 24px;
-            border-radius: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* TINY SMARTPHONE SPECIFIC RULES (<400px) */
-        @media (max-width: 400px) {
+        @media (max-width: 600px) {
             header {
                 padding: 15px 0;
             }
             .lesson-number {
                 position: static;
                 display: block;
-                margin-bottom: 4px;
+                margin-bottom: 6px;
                 font-size: 12px;
             }
             header h1 {
                 padding: 0 15px;
             }
-        }
-
-        /* DESKTOP RESPONSIVE BREAKPOINT OVERRIDE */
-        @media (min-width: 769px) {
-            .dashboard-layout {
-                grid-template-columns: 320px 1fr; /* Side-by-side split screen view */
-                margin: 30px 0;
-                gap: 25px;
+            .dashboard-grid {
+                grid-template-columns: 1fr; /* Stacks 1 column straight down on mobile phones */
+                gap: 15px;
+                margin-bottom: 25px;
             }
-
-            .activity-display {
-                min-height: 650px; /* Taller frame on large monitor configurations */
+            .activity-card {
+                padding: 20px;
             }
-
-            .btn-start:hover, .btn-restart:hover {
-                transform: translateY(-2px); /* Hover micro-lifts exclusively on desktop */
+            /* Provides solid touch activation scaling on small touch screens */
+            .activity-card:active {
+                transform: scale(1.03); 
+            }
+            .btn-restart-container {
+                justify-content: center;
+            }
+            .btn-restart {
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header id="top-menu">
+    <!-- Header Section (Deep Navy) -->
+    <header>
         <span class="lesson-number">Lesson 01</span>
-        <h1>Course Dashboard</h1>
+        <h1>Campsie TAFE: Friday Conversation Class</h1>
     </header>
 
-    <!-- Main Dynamic Layout -->
-    <div class="dashboard-layout">
-        
-        <!-- Controls Column -->
-        <div id="sidebar-panel" class="sidebar">
-            <div class="learning-box">
-                <h2>Today I am learning to:</h2>
-                <p>Complete the core sequence modules step-by-step using interactive elements.</p>
-            </div>
+    <!-- Objective Area (Pale Yellow Box) -->
+    <div class="learning-box">
+        <h2>Today I am learning to:</h2>
+        <p>Utilize prepositional collocations correctly and present findings fluently following our class excursion study program.</p>
+    </div>
 
-            <!-- Interactive Navigation Target Stack -->
-            <div class="links-stack">
-                <a href="activity1.html" target="activity-window" class="btn-start" onclick="handleActivityClick(this)">▶ Activity One</a>
-                <a href="activity2.html" target="activity-window" class="btn-start" onclick="handleActivityClick(this)">▶ Activity Two</a>
-                <a href="activity3.html" target="activity-window" class="btn-start" onclick="handleActivityClick(this)">▶ Activity Three</a>
-                <a href="activity4.html" target="activity-window" class="btn-start" onclick="handleActivityClick(this)">▶ Activity Four</a>
-            </div>
+    <!-- 3x3 Dynamic Response Grid -->
+    <div class="dashboard-grid">
 
-            <!-- System Control Button -->
-            <a href="javascript:location.reload()" class="btn-restart">🔄 Reset System View</a>
-        </div>
+        <!-- Row 1 -->
+        <a href="activity1.html" class="activity-card" onclick="setActiveCard(this)">
+            <h3>Prepositional collocations warmer</h3>
+            <p>Pick a number → use the expression to make your own sentence starting with "I"</p>
+        </a>
 
-        <!-- Interactive Content Window Section -->
-        <div id="workspace" class="activity-display">
-            <!-- Screen shown before clicking buttons -->
-            <div id="placeholder" class="frame-placeholder">
-                <svg width="64" height="64" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.5-3.5L11 12l-2.5 3.5h7z"/></svg>
-                <h3>System Ready</h3>
-                <p>Select an activity button to launch the interactive workspace module here.</p>
-            </div>
+        <a href="activity2.html" class="activity-card" onclick="setActiveCard(this)">
+            <h3>Prepositional collocations revision</h3>
+            <p>A short online quiz about prepositional collocations</p>
+        </a>
 
+        <a href="activity3.html" class="activity-card" onclick="setActiveCard(this)">
+            <h3>Questions after the excursion</h3>
+            <p>Spin the wheel → answer the question</p>
+        </a>
+
+        <!-- Row 2 -->
+        <a href="activity4.html" class="activity-card" onclick="setActiveCard(this)">
+            <h3>Choose your own adventure: Excursion to</h3>
+            <p>Your ending depends on the answers you choose!</p>
+        </a>
+
+        <a href="activity5.html" class="activity-card" onclick="setActiveCard(this)">
+            <h3>Photo proof safari</h3>
+            <p>A Scavenger Hunt at the Art Gallery of NSW</p>
+        </a>
+
+        <a href="activity6.html" class="activity-card" onclick="setActiveCard(this)">
+            <h3>Talk about an artwork</h3>
+            <p>Present your answers in front of the class</p>
+        </a>
+
+        <!-- Row 3 -->
+        <a href="activity7.html" class="activity-card" onclick="setActiveCard(this)">
+            <h3>Back from the excursion (speaking)</h3>
+            <p>Completing key phrases using your own words</p>
+        </a>
+
+        <a href="activity8.html" class="activity-card" onclick="setActiveCard(this)">
+            <h3>Back from the excursion (quiz)</h3>
+            <p>Check how many phrases you know!</p>
+        </a>
+
+        <a href="activity9.html" class="activity-card" onclick="setActiveCard(this)">
+            <h3>Choose your own adventure: Alex's story</h3>
+            <p>Read each page and make choices.</p>
+        </a>
+
+    </div>
+
+    <!-- System Restart Row Area -->
+    <div class="btn-restart-container">
+        <a href="javascript:location.reload()" class="btn-restart">🔄 Reset Selections</a>
+    </div>
+
+    <!-- Active State Visual Interface Logic Script -->
+    <script>
+        function setActiveCard(clickedCard) {
+            // Remove the active styling setup from all current grid card items
+            const cards = document.querySelectorAll('.activity-card');
