@@ -26,6 +26,7 @@
             text-align: center;
             position: relative;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
         }
 
         /* Muted Gold Lesson Accent */
@@ -40,28 +41,31 @@
             letter-spacing: 1px;
         }
 
+        /* Fluid dynamic header sizing for tiny displays */
         header h1 {
             margin: 0;
-            font-size: 28px;
+            font-size: clamp(18px, 5vw, 28px); 
+            padding: 0 110px; /* Leaves clear boundary room for absolute tags */
+            line-height: 1.2;
         }
 
-        /* Layout Grid for Split Screen */
+        /* Mobile-First Fluid Layout Grid */
         .dashboard-layout {
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 25px;
+            grid-template-columns: 1fr; /* Stacks columns vertically on mobile */
+            gap: 20px;
             width: 95%;
             max-width: 1400px;
-            margin: 30px 0;
+            margin: 20px 0 80px 0; /* Extra base margin to prevent sticky footer overlap */
             box-sizing: border-box;
         }
 
-        /* Left Side: Sidebar Control Panel */
+        /* Sidebar Control Panel */
         .sidebar {
             background-color: #FFFFFF; /* White Content Background */
             border: 1px solid #D1D5DB; /* Light Gray Border */
             border-radius: 12px;
-            padding: 25px;
+            padding: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             height: fit-content;
         }
@@ -72,7 +76,7 @@
             border-left: 5px solid #D4AF37; /* Muted Gold Accent Bar */
             padding: 15px;
             border-radius: 6px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .learning-box h2 {
@@ -105,17 +109,26 @@
             color: #FFFFFF; /* White Text */
             text-decoration: none;
             text-align: center;
-            padding: 14px;
+            padding: 16px; /* Great touch targets */
             border-radius: 8px;
             font-size: 16px;
             font-weight: bold;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: all 0.2s ease;
             box-shadow: 0 4px 10px rgba(0, 128, 128, 0.15);
+            border: 2px solid transparent;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-start:hover {
             background-color: #006666; /* Darker Teal */
-            transform: translateY(-2px);
+        }
+
+        /* Active Button Styling */
+        .btn-start.active {
+            background-color: #FFFFFF; /* Flips to White background */
+            color: #008080; /* Teal text */
+            border: 2px solid #008080; /* Teal border */
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         /* White Restart Button */
@@ -125,24 +138,24 @@
             color: #1F2937; /* Dark Gray Text */
             text-decoration: none;
             text-align: center;
-            padding: 12px;
+            padding: 14px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: bold;
             border: 2px solid #D1D5DB; /* Light Gray Border */
-            transition: transform 0.2s, background-color 0.2s;
+            transition: background-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-restart:hover {
-            background-color: #F9FAFB; /* Subtle off-white */
-            transform: translateY(-2px);
+            background-color: #F9FAFB;
         }
 
-        .btn-start:active, .btn-restart:active {
+        .btn-start:active:not(.active), .btn-restart:active, .sticky-nav-btn:active {
             transform: scale(0.98);
         }
 
-        /* Right Side: Activity Frame Window */
+        /* Activity Frame Window Container */
         .activity-display {
             background-color: #FFFFFF; /* White Background */
             border: 1px solid #D1D5DB; /* Light Gray Border */
@@ -151,7 +164,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            min-height: 600px;
+            min-height: 480px; /* Comfortable height for smartphone screens */
         }
 
         /* Default Placeholder Screen View */
@@ -163,7 +176,7 @@
             flex: 1;
             color: #4B5563; /* Dark Gray Text */
             text-align: center;
-            padding: 40px;
+            padding: 30px;
         }
 
         .frame-placeholder svg {
@@ -171,7 +184,7 @@
             margin-bottom: 15px;
         }
 
-        /* Hidden Frame Window till needed */
+        /* Iframe Window Sizing */
         iframe {
             width: 100%;
             height: 100%;
@@ -179,12 +192,72 @@
             flex: 1;
             display: none;
         }
+
+        /* Sticky Footer Navigation Bar for Mobile */
+        .mobile-footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #0A192F; /* Deep Navy Blue */
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none; /* Hidden on desktop screens */
+        }
+
+        .sticky-nav-btn {
+            background-color: #FFFFFF; /* White Action Accent Box */
+            color: #0A192F; /* Deep Navy Text */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* TINY SMARTPHONE SPECIFIC RULES (<400px) */
+        @media (max-width: 400px) {
+            header {
+                padding: 15px 0;
+            }
+            .lesson-number {
+                position: static;
+                display: block;
+                margin-bottom: 4px;
+                font-size: 12px;
+            }
+            header h1 {
+                padding: 0 15px;
+            }
+        }
+
+        /* DESKTOP RESPONSIVE BREAKPOINT OVERRIDE */
+        @media (min-width: 769px) {
+            .dashboard-layout {
+                grid-template-columns: 320px 1fr; /* Side-by-side split screen view */
+                margin: 30px 0;
+                gap: 25px;
+            }
+
+            .activity-display {
+                min-height: 650px; /* Taller frame on large monitor configurations */
+            }
+
+            .btn-start:hover, .btn-restart:hover {
+                transform: translateY(-2px); /* Hover micro-lifts exclusively on desktop */
+            }
+        }
     </style>
 </head>
 <body>
 
     <!-- Header Section -->
-    <header>
+    <header id="top-menu">
         <span class="lesson-number">Lesson 01</span>
         <h1>Course Dashboard</h1>
     </header>
@@ -192,8 +265,8 @@
     <!-- Main Dynamic Layout -->
     <div class="dashboard-layout">
         
-        <!-- Left Column: Controls -->
-        <div class="sidebar">
+        <!-- Controls Column -->
+        <div id="sidebar-panel" class="sidebar">
             <div class="learning-box">
                 <h2>Today I am learning to:</h2>
                 <p>Complete the core sequence modules step-by-step using interactive elements.</p>
@@ -201,39 +274,22 @@
 
             <!-- Interactive Navigation Target Stack -->
             <div class="links-stack">
-                <!-- target="activity-window" directs links to load inside our iframe -->
-                <a href="activity1.html" target="activity-window" class="btn-start" onclick="showFrame()">▶ Activity One</a>
-                <a href="activity2.html" target="activity-window" class="btn-start" onclick="showFrame()">▶ Activity Two</a>
-                <a href="activity3.html" target="activity-window" class="btn-start" onclick="showFrame()">▶ Activity Three</a>
-                <a href="activity4.html" target="activity-window" class="btn-start" onclick="showFrame()">▶ Activity Four</a>
+                <a href="activity1.html" target="activity-window" class="btn-start" onclick="handleActivityClick(this)">▶ Activity One</a>
+                <a href="activity2.html" target="activity-window" class="btn-start" onclick="handleActivityClick(this)">▶ Activity Two</a>
+                <a href="activity3.html" target="activity-window" class="btn-start" onclick="handleActivityClick(this)">▶ Activity Three</a>
+                <a href="activity4.html" target="activity-window" class="btn-start" onclick="handleActivityClick(this)">▶ Activity Four</a>
             </div>
 
             <!-- System Control Button -->
             <a href="javascript:location.reload()" class="btn-restart">🔄 Reset System View</a>
         </div>
 
-        <!-- Right Column: Interactive Content Window -->
-        <div class="activity-display">
+        <!-- Interactive Content Window Section -->
+        <div id="workspace" class="activity-display">
             <!-- Screen shown before clicking buttons -->
             <div id="placeholder" class="frame-placeholder">
                 <svg width="64" height="64" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.5-3.5L11 12l-2.5 3.5h7z"/></svg>
                 <h3>System Ready</h3>
-                <p>Select an activity button on the left to launch the interactive workspace module here.</p>
+                <p>Select an activity button to launch the interactive workspace module here.</p>
             </div>
 
-            <!-- Content frame container -->
-            <iframe id="activity-window" name="activity-window"></iframe>
-        </div>
-
-    </div>
-
-    <!-- Interface Controller Logic Script -->
-    <script>
-        function showFrame() {
-            document.getElementById('placeholder').style.display = 'none';
-            document.getElementById('activity-window').style.display = 'block';
-        }
-    </script>
-
-</body>
-</html>
