@@ -88,7 +88,7 @@
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
             gap: 25px;
             margin-bottom: 35px;
-            counter-reset: tile-counter; /* Initialize counter mechanism */
+            counter-reset: tile-counter; /* Initialise counter mechanism */
         }
 
         /* Individual Interactive Tile Setup */
@@ -111,7 +111,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* AUTOMATED FLOATING NUMBER BADGES WITH SUBTLE SHADOW */
+        /* AUTOMATED FLOATING NUMBER BADGES */
         .activity-card::before {
             counter-increment: tile-counter; /* Add 1 automatically per tile */
             content: counter(tile-counter); /* Render calculation value */
@@ -127,11 +127,7 @@
             font-size: 20px;
             font-weight: 800;
             color: #FFFFFF;
-            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            
-            /* Clean base drop shadow layer */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 
-                        0 1px 3px rgba(0, 0, 0, 0.08); 
+            transition: background-color 0.2s, color 0.2s;
         }
 
         /* Extra Friendly Title Text Fonts */
@@ -170,20 +166,12 @@
         .border-teal h3 { color: #006666; } 
         .border-teal::before { background-color: #008080; } /* Teal Badge */
 
-        /* -------------------------------------------------------------
-           DYNAMIC HOVER SHADOW DEPTH INCREASES
-        ------------------------------------------------------------- */
+        /* Desktop Hover state scaling animation rules */
         @media (hover: hover) {
             .activity-card:hover {
                 transform: scale(1.04);
                 box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
                 background-color: #FFFFFF;
-            }
-            
-            /* Increases shadow depth on the badge dynamically when card is hovered */
-            .activity-card:hover::before {
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 
-                            0 3px 6px rgba(0, 0, 0, 0.15);
             }
         }
 
@@ -204,8 +192,6 @@
         .activity-card.active::before {
             background-color: #FFFFFF !important; /* Flips badge circle white */
             color: #008080 !important; /* Flips badge text teal */
-            /* Changes shadow to a crisp ambient anchor variant */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
         }
 
         /* Reset System Button Module Wrapper */
@@ -269,9 +255,37 @@
                 height: 40px;
                 font-size: 18px;
             }
-            
-            /* Finger press feedback response depth shadow modifier on mobile touch inputs */
             .activity-card:active {
                 transform: scale(1.02);
             }
-            .activity-card:active::before {
+            .btn-restart-container {
+                justify-content: center;
+            }
+            .btn-restart {
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section (Deep Navy with Updated Unit Title) -->
+    <header>
+        <h1>Learning activities for VU23520</h1>
+    </header>
+
+    <!-- HIGH CONTRAST WHITE WRAPPER CANVAS AREA -->
+    <div class="main-content-canvas">
+
+        <!-- Objective Area (Pale Yellow Box with Updated Objectives) -->
+        <div class="learning-box">
+            <h2>Today I am learning to:</h2>
+            <p>Give and respond to simple spoken information and directions</p>
+        </div>
+
+        <!-- INFINITE DYNAMIC GRID LAYOUT WITH COUNTER BADGES -->
+        <div class="dashboard-grid">
+
+            <!-- Card 1 -->
