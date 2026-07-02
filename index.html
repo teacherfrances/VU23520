@@ -41,7 +41,6 @@
             letter-spacing: 1px;
         }
 
-        /* Fluid dynamic header sizing for mobile displays */
         header h1 {
             margin: 0;
             font-size: clamp(18px, 4vw, 28px);
@@ -76,7 +75,7 @@
             line-height: 1.4;
         }
 
-        /* 3x3 Responsive Layout Grid matching the image */
+        /* 3x3 Responsive Layout Grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* 3 equal columns on desktop */
@@ -87,10 +86,10 @@
             box-sizing: border-box;
         }
 
-        /* Card Link Buttons using Light Gray borders */
+        /* Base Card Styling with a Default Light Gray Fallback */
         .activity-card {
-            background-color: #FFFFFF; /* White Background */
-            border: 2px solid #D1D5DB; /* Light Gray Border */
+            background-color: #FFFFFF; /* White Content Background */
+            border: 2.5px solid #D1D5DB; /* Light Gray Outer Border */
             border-radius: 16px;
             padding: 24px;
             text-decoration: none;
@@ -98,57 +97,70 @@
             flex-direction: column;
             justify-content: flex-start;
             text-align: left;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
             transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        background-color 0.2s, 
                         border-color 0.2s, 
                         box-shadow 0.2s;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Main Activity Titles inside Card (Teal Primary Action Color) */
-        .activity-card h3 {
-            color: #008080; /* Teal / Dark Green */
-            margin: 0 0 12px 0;
-            font-size: 18px;
-            font-weight: bold;
-            line-height: 1.3;
-        }
-
-        /* Body Explanations Inside Card */
+        /* Black/Dark Gray text for main body explanations */
         .activity-card p {
-            color: #1F2937; /* Black/Dark Gray Body Text */
+            color: #1F2937; 
             margin: 0;
             font-size: 14px;
             line-height: 1.5;
         }
 
-        /* HOVER: Elevate and enlarge card cleanly on mouse device inputs */
+        /* -------------------------------------------------------------
+           INDIVIDUAL CARD COLOUR STYLES (Matching the Image Layout)
+        ------------------------------------------------------------- */
+        
+        /* Muted Gold / Warm Yellow Tiles (1, 3, 7) */
+        .tile-gold { border-color: #D4AF37; }
+        .tile-gold h3 { color: #D4AF37; margin: 0 0 12px 0; font-size: 18px; font-weight: bold; }
+
+        /* Maroon / Pink Pink Revision Tiles (2, 8) */
+        .tile-pink { border-color: #ff6b81; }
+        .tile-pink h3 { color: #ff6b81; margin: 0 0 12px 0; font-size: 18px; font-weight: bold; }
+
+        /* Steel Blue / Medium Blue Adventure Tiles (4, 9) */
+        .tile-blue { border-color: #4682B4; }
+        .tile-blue h3 { color: #4682B4; margin: 0 0 12px 0; font-size: 18px; font-weight: bold; }
+
+        /* Teal / Dark Green Safari Tiles (5, 6) */
+        .tile-teal { border-color: #008080; }
+        .tile-teal h3 { color: #008080; margin: 0 0 12px 0; font-size: 18px; font-weight: bold; }
+
+        /* -------------------------------------------------------------
+           RESPONSIVE INTERACTION STATES (Enlarge / Select)
+        ------------------------------------------------------------- */
+        
+        /* Desktop Hover state */
         @media (hover: hover) {
             .activity-card:hover {
                 transform: scale(1.04); /* Enlarge animation */
-                border-color: #008080; /* Changes light gray border to teal on focus */
-                box-shadow: 0 10px 25px rgba(0, 128, 128, 0.1);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
             }
         }
 
-        /* ACTIVE SELECTION STATE: Flips card design entirely into corporate palette focus */
+        /* Active Selected State: Turns the card into the Teal action color */
         .activity-card.active {
-            background-color: #008080; /* Flips card to Teal Background */
+            background-color: #008080; /* Flips background color entirely to Teal */
             border-color: #008080;
-            transform: scale(1.05); /* Keeps selected option enlarged */
+            transform: scale(1.05); /* Enlarge sticky focus state */
             box-shadow: 0 8px 20px rgba(0, 128, 128, 0.2);
         }
 
-        .activity-card.active h3 {
-            color: #FFFFFF; /* Text transitions to White on dark background */
-        }
-
+        /* Switches all inner headings and text to crisp White when selected */
+        .activity-card.active h3, 
         .activity-card.active p {
-            color: #FFFFFF; /* Description text changes to White */
-            opacity: 0.9;
+            color: #FFFFFF !important; 
+            opacity: 1;
         }
 
-        /* Dynamic System View Controller Button */
+        /* Reset System Button Container */
         .btn-restart-container {
             width: 90%;
             max-width: 1200px;
@@ -173,10 +185,12 @@
             background-color: #F9FAFB;
         }
 
-        /* RESPONSIVE RESPONSIVENESS OVERRIDES */
+        /* -------------------------------------------------------------
+           MOBILE RESPONSIVE TILES OVERRIDES
+        ------------------------------------------------------------- */
         @media (max-width: 992px) {
             .dashboard-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet devices */
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on intermediate tablet screen sizes */
             }
         }
 
@@ -194,16 +208,15 @@
                 padding: 0 15px;
             }
             .dashboard-grid {
-                grid-template-columns: 1fr; /* Stacks 1 column straight down on mobile phones */
+                grid-template-columns: 1fr; /* Mobile viewports break down into 1 single responsive fluid column */
                 gap: 15px;
                 margin-bottom: 25px;
             }
             .activity-card {
                 padding: 20px;
             }
-            /* Provides solid touch activation scaling on small touch screens */
             .activity-card:active {
-                transform: scale(1.03); 
+                transform: scale(1.03); /* Finger press feedback response scale */
             }
             .btn-restart-container {
                 justify-content: center;
@@ -230,66 +243,41 @@
         <p>Utilize prepositional collocations correctly and present findings fluently following our class excursion study program.</p>
     </div>
 
-    <!-- 3x3 Dynamic Response Grid -->
+    <!-- 3x3 Multi-Colored Responsive Grid Layout -->
     <div class="dashboard-grid">
 
         <!-- Row 1 -->
-        <a href="activity1.html" class="activity-card" onclick="setActiveCard(this)">
+        <a href="activity1.html" class="activity-card tile-gold" onclick="setActiveCard(this)">
             <h3>Prepositional collocations warmer</h3>
             <p>Pick a number → use the expression to make your own sentence starting with "I"</p>
         </a>
 
-        <a href="activity2.html" class="activity-card" onclick="setActiveCard(this)">
+        <a href="activity2.html" class="activity-card tile-pink" onclick="setActiveCard(this)">
             <h3>Prepositional collocations revision</h3>
             <p>A short online quiz about prepositional collocations</p>
         </a>
 
-        <a href="activity3.html" class="activity-card" onclick="setActiveCard(this)">
+        <a href="activity3.html" class="activity-card tile-gold" onclick="setActiveCard(this)">
             <h3>Questions after the excursion</h3>
             <p>Spin the wheel → answer the question</p>
         </a>
 
         <!-- Row 2 -->
-        <a href="activity4.html" class="activity-card" onclick="setActiveCard(this)">
+        <a href="activity4.html" class="activity-card tile-blue" onclick="setActiveCard(this)">
             <h3>Choose your own adventure: Excursion to</h3>
             <p>Your ending depends on the answers you choose!</p>
         </a>
 
-        <a href="activity5.html" class="activity-card" onclick="setActiveCard(this)">
+        <a href="activity5.html" class="activity-card tile-teal" onclick="setActiveCard(this)">
             <h3>Photo proof safari</h3>
             <p>A Scavenger Hunt at the Art Gallery of NSW</p>
         </a>
 
-        <a href="activity6.html" class="activity-card" onclick="setActiveCard(this)">
+        <a href="activity6.html" class="activity-card tile-teal" onclick="setActiveCard(this)">
             <h3>Talk about an artwork</h3>
             <p>Present your answers in front of the class</p>
         </a>
 
         <!-- Row 3 -->
-        <a href="activity7.html" class="activity-card" onclick="setActiveCard(this)">
+        <a href="activity7.html" class="activity-card tile-gold" onclick="setActiveCard(this)">
             <h3>Back from the excursion (speaking)</h3>
-            <p>Completing key phrases using your own words</p>
-        </a>
-
-        <a href="activity8.html" class="activity-card" onclick="setActiveCard(this)">
-            <h3>Back from the excursion (quiz)</h3>
-            <p>Check how many phrases you know!</p>
-        </a>
-
-        <a href="activity9.html" class="activity-card" onclick="setActiveCard(this)">
-            <h3>Choose your own adventure: Alex's story</h3>
-            <p>Read each page and make choices.</p>
-        </a>
-
-    </div>
-
-    <!-- System Restart Row Area -->
-    <div class="btn-restart-container">
-        <a href="javascript:location.reload()" class="btn-restart">🔄 Reset Selections</a>
-    </div>
-
-    <!-- Active State Visual Interface Logic Script -->
-    <script>
-        function setActiveCard(clickedCard) {
-            // Remove the active styling setup from all current grid card items
-            const cards = document.querySelectorAll('.activity-card');
