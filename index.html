@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Learning Portal</title>
-    <!-- Modern, highly readable font used by tech professionals -->
+    
+    <!-- Using a high-reliability Google Fonts link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #2563eb;       /* Professional Indigo */
-            --primary-dark: #1e40af;
-            --bg-body: #f8fafc;       /* Soft Slate Grey */
-            --text-main: #0f172a;     /* Deep Navy */
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f8fafc;
+            --text-main: #0f172a;
             --text-muted: #64748b;
             --card-bg: #ffffff;
-            --revision-border: #e2e8f0;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --card-shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
 
+        /* Reset & Base */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -24,126 +31,123 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 80px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Hero Header */
         header {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 80px 24px 40px;
-            text-align: left;
+            padding: 60px 24px;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            letter-spacing: -0.025em;
+            color: var(--text-main);
             margin-bottom: 12px;
         }
 
         .header-desc {
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             color: var(--text-muted);
-            max-width: 600px;
+            max-width: 650px;
         }
 
-        /* The Grid */
+        /* Container & Grid */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 24px 80px;
         }
 
         .learning-grid {
             display: grid;
-            /* Layout: 3 items per row on large screens to fit the 1+2 pattern perfectly */
+            /* Layout: 3 items per row on large screens */
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 24px;
         }
 
-        /* Base Card Styling */
+        /* Base Card Logic */
         .card {
             background: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 32px;
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            border: 1px solid transparent;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: var(--card-shadow);
         }
 
-        /* Subtle but professional hover */
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: var(--card-shadow-hover);
+            border-color: var(--primary);
         }
 
-        /* Main Lesson Cards (Strong Visuals) */
+        /* Lesson vs Revision Visuals */
         .card.main-lesson {
             background-color: var(--text-main);
-            color: white;
+            color: #ffffff;
+            border: none;
         }
 
         .card.main-lesson .number {
             color: var(--primary);
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
             line-height: 1;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
         }
 
-        /* Revision Cards (Minimalist/Outline) */
         .card.revision-part {
-            border: 1px solid var(--revision-border);
-            background: white;
+            background-color: #ffffff;
         }
 
         .card.revision-part .number {
             color: var(--text-main);
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
             display: flex;
             align-items: baseline;
-            gap: 4px;
+            gap: 6px;
         }
 
         .card.revision-part .number span {
-            font-size: 1rem;
+            font-size: 1.25rem;
             color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-weight: 600;
         }
 
         /* Content Text */
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 8px;
         }
 
         p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
+            margin-bottom: 20px;
         }
 
         .main-lesson p {
             color: #94a3b8;
         }
 
-        /* Small Badge */
+        /* Professional Label/Badge */
         .badge {
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 99px;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -152,12 +156,13 @@
             align-self: flex-start;
         }
 
-        .main-lesson .badge { background: var(--primary); color: white; margin-top: 20px;}
-        .revision-part .badge { background: #f1f5f9; color: var(--text-main); margin-top: 20px;}
+        .main-lesson .badge { background: var(--primary); color: white; }
+        .revision-part .badge { background: #f1f5f9; color: var(--text-muted); }
 
-        /* Tablet/Mobile logic */
-        @media (max-width: 640px) {
-            h1 { font-size: 2.25rem; }
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            header { padding: 40px 24px; }
             .learning-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -165,86 +170,155 @@
 <body>
 
     <header>
-        <h1>Curriculum Overview</h1>
-        <p class="header-desc">Master the core concepts through structured lessons and targeted revision sessions.</p>
+        <h1>Learning Modules</h1>
+        <p class="header-desc">Access your course curriculum and supplementary revision materials below.</p>
     </header>
 
-    <main class="container">
-        <div class="learning-grid">
+    <div class="container">
+        <main class="learning-grid">
             
-            <!-- LESSON 1 GROUP -->
+            <!-- Lesson 1 Group -->
             <a href="#" class="card main-lesson">
                 <div class="number">01</div>
-                <h3>Foundations</h3>
-                <p>Core principles and introductory frameworks for the course.</p>
-                <div class="badge">Primary Module</div>
+                <h3>Core Principles</h3>
+                <p>Establishing the fundamental framework for the upcoming semester.</p>
+                <div class="badge">Module One</div>
             </a>
-
             <a href="#" class="card revision-part">
-                <div class="number">1<span>A</span></div>
-                <h3>Revision A</h3>
-                <p>Deep dive into foundational logic and terminology.</p>
-                <div class="badge">Review</div>
+                <div class="number">1<span>PART A</span></div>
+                <h3>Theory Revision</h3>
+                <p>Revisiting key conceptual models and vocabulary.</p>
+                <div class="badge">Revision</div>
             </a>
-
             <a href="#" class="card revision-part">
-                <div class="number">1<span>B</span></div>
-                <h3>Revision B</h3>
-                <p>Practical application exercises for module one.</p>
-                <div class="badge">Review</div>
+                <div class="number">1<span>PART B</span></div>
+                <h3>Application Prep</h3>
+                <p>Practical review exercises for module one concepts.</p>
+                <div class="badge">Revision</div>
             </a>
 
-            <!-- LESSON 2 GROUP -->
+            <!-- Lesson 2 Group -->
             <a href="#" class="card main-lesson">
                 <div class="number">02</div>
-                <h3>Intermediate Theory</h3>
-                <p>Building upon foundations with complex structural analysis.</p>
-                <div class="badge">Primary Module</div>
+                <h3>Strategic Analysis</h3>
+                <p>Learning to evaluate systems through a professional lens.</p>
+                <div class="badge">Module Two</div>
             </a>
-
             <a href="#" class="card revision-part">
-                <div class="number">2<span>A</span></div>
-                <h3>Revision A</h3>
-                <p>Clarifying theoretical bottlenecks from lesson two.</p>
-                <div class="badge">Review</div>
+                <div class="number">2<span>PART A</span></div>
+                <h3>Analysis Review</h3>
+                <p>Techniques for deepening investigative results.</p>
+                <div class="badge">Revision</div>
             </a>
-
             <a href="#" class="card revision-part">
-                <div class="number">2<span>B</span></div>
-                <h3>Revision B</h3>
-                <p>Case study analysis and workflow optimization.</p>
-                <div class="badge">Review</div>
+                <div class="number">2<span>PART B</span></div>
+                <h3>Data Interpretation</h3>
+                <p>Practice session for interpreting complex findings.</p>
+                <div class="badge">Revision</div>
             </a>
 
-            <!-- Repeat pattern for Lesson 3 to 7 ... (Generating the rest for you) -->
-            
-            <!-- LESSON 3 -->
-            <a href="#" class="card main-lesson"><div class="number">03</div><h3>Advanced Systems</h3><p>Integrating multiple workflows into a single system.</p><div class="badge">Primary Module</div></a>
-            <a href="#" class="card revision-part"><div class="number">3<span>A</span></div><h3>Revision A</h3><p>System integration troubleshooting.</p><div class="badge">Review</div></a>
-            <a href="#" class="card revision-part"><div class="number">3<span>B</span></div><h3>Revision B</h3><p>Performance metrics and testing.</p><div class="badge">Review</div></a>
+            <!-- Lesson 3 Group -->
+            <a href="#" class="card main-lesson">
+                <div class="number">03</div>
+                <h3>Advanced Implementation</h3>
+                <p>Executing high-level strategies in real-world scenarios.</p>
+                <div class="badge">Module Three</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">3<span>PART A</span></div>
+                <h3>Refining Execution</h3>
+                <p>A closer look at optimization and efficiency.</p>
+                <div class="badge">Revision</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">3<span>PART B</span></div>
+                <h3>Troubleshooting</h3>
+                <p>Standard protocols for handling implementation errors.</p>
+                <div class="badge">Revision</div>
+            </a>
 
-            <!-- LESSON 4 -->
-            <a href="#" class="card main-lesson"><div class="number">04</div><h3>Strategic Design</h3><p>Forward-thinking strategies for long-term projects.</p><div class="badge">Primary Module</div></a>
-            <a href="#" class="card revision-part"><div class="number">4<span>A</span></div><h3>Revision A</h3><p>Strategy refinement session.</p><div class="badge">Review</div></a>
-            <a href="#" class="card revision-part"><div class="number">4<span>B</span></div><h3>Revision B</h3><p>Risk assessment review.</p><div class="badge">Review</div></a>
+            <!-- Lesson 4 Group -->
+            <a href="#" class="card main-lesson">
+                <div class="number">04</div>
+                <h3>Project Governance</h3>
+                <p>Management standards and ethical considerations.</p>
+                <div class="badge">Module Four</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">4<span>PART A</span></div>
+                <h3>Compliance Review</h3>
+                <p>Regulatory updates and governance frameworks.</p>
+                <div class="badge">Revision</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">4<span>PART B</span></div>
+                <h3>Ethical Deep-dive</h3>
+                <p>Case studies on professional ethics and integrity.</p>
+                <div class="badge">Revision</div>
+            </a>
 
-            <!-- LESSON 5 -->
-            <a href="#" class="card main-lesson"><div class="number">05</div><h3>Data Analytics</h3><p>Using metrics to drive educational decisions.</p><div class="badge">Primary Module</div></a>
-            <a href="#" class="card revision-part"><div class="number">5<span>A</span></div><h3>Revision A</h3><p>Data visualization basics.</p><div class="badge">Review</div></a>
-            <a href="#" class="card revision-part"><div class="number">5<span>B</span></div><h3>Revision B</h3><p>Interpreting complex datasets.</p><div class="badge">Review</div></a>
+            <!-- Lesson 5 Group -->
+            <a href="#" class="card main-lesson">
+                <div class="number">05</div>
+                <h3>Collaborative Design</h3>
+                <p>Working effectively across multidisciplinary teams.</p>
+                <div class="badge">Module Five</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">5<span>PART A</span></div>
+                <h3>Team Dynamics</h3>
+                <p>Communication strategies for complex projects.</p>
+                <div class="badge">Revision</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">5<span>PART B</span></div>
+                <h3>Feedback Loops</h3>
+                <p>Implementing constructive critique structures.</p>
+                <div class="badge">Revision</div>
+            </a>
 
-            <!-- LESSON 6 -->
-            <a href="#" class="card main-lesson"><div class="number">06</div><h3>Leadership & Ethics</h3><p>Navigating the professional landscape with integrity.</p><div class="badge">Primary Module</div></a>
-            <a href="#" class="card revision-part"><div class="number">6<span>A</span></div><h3>Revision A</h3><p>Ethics case study review.</p><div class="badge">Review</div></a>
-            <a href="#" class="card revision-part"><div class="number">6<span>B</span></div><h3>Revision B</h3><p>Communication strategy lab.</p><div class="badge">Review</div></a>
+            <!-- Lesson 6 Group -->
+            <a href="#" class="card main-lesson">
+                <div class="number">06</div>
+                <h3>Quality Assurance</h3>
+                <p>Maintaining high standards through rigorous testing.</p>
+                <div class="badge">Module Six</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">6<span>PART A</span></div>
+                <h3>Audit Protocols</h3>
+                <p>Preparation for internal and external quality audits.</p>
+                <div class="badge">Revision</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">6<span>PART B</span></div>
+                <h3>Standardization</h3>
+                <p>Ensuring consistency across diverse deliverables.</p>
+                <div class="badge">Revision</div>
+            </a>
 
-            <!-- LESSON 7 -->
-            <a href="#" class="card main-lesson"><div class="number">07</div><h3>Final Capstone</h3><p>Combining all skills into a professional portfolio piece.</p><div class="badge">Primary Module</div></a>
-            <a href="#" class="card revision-part"><div class="number">7<span>A</span></div><h3>Revision A</h3><p>Portfolio polish and feedback.</p><div class="badge">Review</div></a>
-            <a href="#" class="card revision-part"><div class="number">7<span>B</span></div><h3>Revision B</h3><p>Exam preparation & final summary.</p><div class="badge">Review</div></a>
+            <!-- Lesson 7 Group -->
+            <a href="#" class="card main-lesson">
+                <div class="number">07</div>
+                <h3>Final Capstone</h3>
+                <p>Synthesis of all prior modules into a final project.</p>
+                <div class="badge">Final Module</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">7<span>PART A</span></div>
+                <h3>Project Polish</h3>
+                <p>Finalizing documentation and visual presentation.</p>
+                <div class="badge">Revision</div>
+            </a>
+            <a href="#" class="card revision-part">
+                <div class="number">7<span>PART B</span></div>
+                <h3>Summary Defense</h3>
+                <p>Preparing for the final presentation and Q&A.</p>
+                <div class="badge">Revision</div>
+            </a>
 
-        </div>
-    </main>
+        </main>
+    </div>
 
 </body>
 </html>
