@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VU23520: Give and respond to simple spoken information and directions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    <title>Professional Learning Portal</title>
+    <!-- Modern, highly readable font used by tech professionals -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fdfcf0;
-            --text-dark: #333;
-            /* Fun Palette */
-            --color1: #ff6b6b; /* Red-ish */
-            --color2: #4ecdc4; /* Teal */
-            --color3: #ffe66d; /* Yellow */
-            --color4: #a29bfe; /* Purple */
-            --color5: #fab1a0; /* Peach */
-            --color6: #55efc4; /* Mint */
-            --color7: #fd79a8; /* Pink */
+            --primary: #2563eb;       /* Professional Indigo */
+            --primary-dark: #1e40af;
+            --bg-body: #f8fafc;       /* Soft Slate Grey */
+            --text-main: #0f172a;     /* Deep Navy */
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --revision-border: #e2e8f0;
         }
 
         * {
@@ -26,171 +24,224 @@
         }
 
         body {
-            font-family: 'Fredoka', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            padding-bottom: 100px;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 80px;
         }
 
+        /* Hero Header */
         header {
-            text-align: center;
-            padding: 80px 20px;
-            background: #fff;
-            border-bottom: 8px solid #eee;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px 40px;
+            text-align: left;
         }
 
         h1 {
-            font-size: 4rem;
-            color: #2d3436;
-            letter-spacing: -1px;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 12px;
         }
 
-        .subtitle {
-            font-size: 1.5rem;
-            color: #636e72;
-            margin-top: 10px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 25px;
+        .header-desc {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
         }
 
         /* The Grid */
-        .lesson-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        /* The Cards */
+        .learning-grid {
+            display: grid;
+            /* Layout: 3 items per row on large screens to fit the 1+2 pattern perfectly */
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* Base Card Styling */
         .card {
-            background: white;
-            border-radius: 40px;
-            padding: 40px 20px;
-            text-align: center;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 32px;
             text-decoration: none;
             color: inherit;
-            box-shadow: 0 15px 0px rgba(0,0,0,0.05);
-            border: 4px solid #f0f0f0;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            align-items: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid transparent;
         }
 
+        /* Subtle but professional hover */
         .card:hover {
-            transform: translateY(-12px) rotate(2deg);
-            box-shadow: 0 25px 0px rgba(0,0,0,0.05);
-            border-color: var(--text-dark);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        /* The Giant Numbers */
-        .number-badge {
-            font-size: 6rem;
-            font-weight: 700;
+        /* Main Lesson Cards (Strong Visuals) */
+        .card.main-lesson {
+            background-color: var(--text-main);
+            color: white;
+        }
+
+        .card.main-lesson .number {
+            color: var(--primary);
+            font-size: 4rem;
+            font-weight: 800;
             line-height: 1;
-            margin-bottom: 15px;
-            display: block;
-            -webkit-text-stroke: 3px #2d3436;
-            paint-order: stroke fill;
-            filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.1));
+            margin-bottom: 8px;
         }
 
+        /* Revision Cards (Minimalist/Outline) */
+        .card.revision-part {
+            border: 1px solid var(--revision-border);
+            background: white;
+        }
+
+        .card.revision-part .number {
+            color: var(--text-main);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .card.revision-part .number span {
+            font-size: 1rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Content Text */
         h3 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
 
         p {
-            font-size: 1.2rem;
-            color: #636e72;
+            font-size: 1rem;
+            color: var(--text-muted);
         }
 
-        /* Individual Card Colors */
-        .c1 .number-badge { color: var(--color1); }
-        .c2 .number-badge { color: var(--color2); }
-        .c3 .number-badge { color: var(--color3); }
-        .c4 .number-badge { color: var(--color4); }
-        .c5 .number-badge { color: var(--color5); }
-        .c6 .number-badge { color: var(--color6); }
-        .c7 .number-badge { color: var(--color7); }
+        .main-lesson p {
+            color: #94a3b8;
+        }
 
-        /* Custom Hover Border Colors */
-        .c1:hover { border-color: var(--color1); }
-        .c2:hover { border-color: var(--color2); }
-        .c3:hover { border-color: var(--color3); }
-        .c4:hover { border-color: var(--color4); }
-        .c5:hover { border-color: var(--color5); }
-        .c6:hover { border-color: var(--color6); }
-        .c7:hover { border-color: var(--color7); }
+        /* Small Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: auto;
+            align-self: flex-start;
+        }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .number-badge { font-size: 5rem; }
+        .main-lesson .badge { background: var(--primary); color: white; margin-top: 20px;}
+        .revision-part .badge { background: #f1f5f9; color: var(--text-main); margin-top: 20px;}
+
+        /* Tablet/Mobile logic */
+        @media (max-width: 640px) {
+            h1 { font-size: 2.25rem; }
+            .learning-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Ready to Learn?</h1>
-        <p class="subtitle">Complete the lessons below to earn your badge!</p>
+        <h1>Curriculum Overview</h1>
+        <p class="header-desc">Master the core concepts through structured lessons and targeted revision sessions.</p>
     </header>
 
     <main class="container">
-        <div class="lesson-grid">
+        <div class="learning-grid">
             
-            <!-- Lesson 1 -->
-            <a href="#" class="card c1">
-                <span class="number-badge">1</span>
-                <h3>Lesson One</h3>
-                <p>Welcome to the start of your big journey!</p>
+            <!-- LESSON 1 GROUP -->
+            <a href="#" class="card main-lesson">
+                <div class="number">01</div>
+                <h3>Foundations</h3>
+                <p>Core principles and introductory frameworks for the course.</p>
+                <div class="badge">Primary Module</div>
             </a>
 
-            <!-- Lesson 2 -->
-            <a href="#" class="card c2">
-                <span class="number-badge">2</span>
-                <h3>Lesson Two</h3>
-                <p>Time to discover some amazing things.</p>
+            <a href="#" class="card revision-part">
+                <div class="number">1<span>A</span></div>
+                <h3>Revision A</h3>
+                <p>Deep dive into foundational logic and terminology.</p>
+                <div class="badge">Review</div>
             </a>
 
-            <!-- Lesson 3 -->
-            <a href="#" class="card c3">
-                <span class="number-badge">3</span>
-                <h3>Lesson Three</h3>
-                <p>Let's dive deeper into the magic.</p>
+            <a href="#" class="card revision-part">
+                <div class="number">1<span>B</span></div>
+                <h3>Revision B</h3>
+                <p>Practical application exercises for module one.</p>
+                <div class="badge">Review</div>
             </a>
 
-            <!-- Lesson 4 -->
-            <a href="#" class="card c4">
-                <span class="number-badge">4</span>
-                <h3>Lesson Four</h3>
-                <p>You're halfway there! Keep going.</p>
+            <!-- LESSON 2 GROUP -->
+            <a href="#" class="card main-lesson">
+                <div class="number">02</div>
+                <h3>Intermediate Theory</h3>
+                <p>Building upon foundations with complex structural analysis.</p>
+                <div class="badge">Primary Module</div>
             </a>
 
-            <!-- Lesson 5 -->
-            <a href="#" class="card c5">
-                <span class="number-badge">5</span>
-                <h3>Lesson Five</h3>
-                <p>Exploring even more secrets today.</p>
+            <a href="#" class="card revision-part">
+                <div class="number">2<span>A</span></div>
+                <h3>Revision A</h3>
+                <p>Clarifying theoretical bottlenecks from lesson two.</p>
+                <div class="badge">Review</div>
             </a>
 
-            <!-- Lesson 6 -->
-            <a href="#" class="card c6">
-                <span class="number-badge">6</span>
-                <h3>Lesson Six</h3>
-                <p>Almost at the finish line. Great job!</p>
+            <a href="#" class="card revision-part">
+                <div class="number">2<span>B</span></div>
+                <h3>Revision B</h3>
+                <p>Case study analysis and workflow optimization.</p>
+                <div class="badge">Review</div>
             </a>
 
-            <!-- Lesson 7 -->
-            <a href="#" class="card c7">
-                <span class="number-badge">7</span>
-                <h3>Lesson Seven</h3>
-                <p>The final challenge awaits you!</p>
-            </a>
+            <!-- Repeat pattern for Lesson 3 to 7 ... (Generating the rest for you) -->
+            
+            <!-- LESSON 3 -->
+            <a href="#" class="card main-lesson"><div class="number">03</div><h3>Advanced Systems</h3><p>Integrating multiple workflows into a single system.</p><div class="badge">Primary Module</div></a>
+            <a href="#" class="card revision-part"><div class="number">3<span>A</span></div><h3>Revision A</h3><p>System integration troubleshooting.</p><div class="badge">Review</div></a>
+            <a href="#" class="card revision-part"><div class="number">3<span>B</span></div><h3>Revision B</h3><p>Performance metrics and testing.</p><div class="badge">Review</div></a>
+
+            <!-- LESSON 4 -->
+            <a href="#" class="card main-lesson"><div class="number">04</div><h3>Strategic Design</h3><p>Forward-thinking strategies for long-term projects.</p><div class="badge">Primary Module</div></a>
+            <a href="#" class="card revision-part"><div class="number">4<span>A</span></div><h3>Revision A</h3><p>Strategy refinement session.</p><div class="badge">Review</div></a>
+            <a href="#" class="card revision-part"><div class="number">4<span>B</span></div><h3>Revision B</h3><p>Risk assessment review.</p><div class="badge">Review</div></a>
+
+            <!-- LESSON 5 -->
+            <a href="#" class="card main-lesson"><div class="number">05</div><h3>Data Analytics</h3><p>Using metrics to drive educational decisions.</p><div class="badge">Primary Module</div></a>
+            <a href="#" class="card revision-part"><div class="number">5<span>A</span></div><h3>Revision A</h3><p>Data visualization basics.</p><div class="badge">Review</div></a>
+            <a href="#" class="card revision-part"><div class="number">5<span>B</span></div><h3>Revision B</h3><p>Interpreting complex datasets.</p><div class="badge">Review</div></a>
+
+            <!-- LESSON 6 -->
+            <a href="#" class="card main-lesson"><div class="number">06</div><h3>Leadership & Ethics</h3><p>Navigating the professional landscape with integrity.</p><div class="badge">Primary Module</div></a>
+            <a href="#" class="card revision-part"><div class="number">6<span>A</span></div><h3>Revision A</h3><p>Ethics case study review.</p><div class="badge">Review</div></a>
+            <a href="#" class="card revision-part"><div class="number">6<span>B</span></div><h3>Revision B</h3><p>Communication strategy lab.</p><div class="badge">Review</div></a>
+
+            <!-- LESSON 7 -->
+            <a href="#" class="card main-lesson"><div class="number">07</div><h3>Final Capstone</h3><p>Combining all skills into a professional portfolio piece.</p><div class="badge">Primary Module</div></a>
+            <a href="#" class="card revision-part"><div class="number">7<span>A</span></div><h3>Revision A</h3><p>Portfolio polish and feedback.</p><div class="badge">Review</div></a>
+            <a href="#" class="card revision-part"><div class="number">7<span>B</span></div><h3>Revision B</h3><p>Exam preparation & final summary.</p><div class="badge">Review</div></a>
 
         </div>
     </main>
